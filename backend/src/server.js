@@ -672,5 +672,21 @@ app.use((err,req,res,next)=>{
   res.status(err?.status||500).json({message:err?.message||'Internal server error'});
 });
 
-const port=Number(process.env.PORT||4000);
-ensureDatabase().then(init).then(()=>app.listen(port,()=>console.log(`NLQueryEngine API running on :${port}`))).catch(e=>{console.error('Startup failed:',e);process.exit(1)});
+
+export { app };
+
+if (process.env.NODE_ENV !== 'test') {
+  const port = Number(process.env.PORT || 4000);
+
+    ensureDatabase()
+    .then(init)
+    .then(() => {
+      app.listen(port, () => {
+        console.log(`NLQueryEngine API running on :${port}`);
+      });
+    })
+    .catch((error) => {
+      console.error('Startup failed:', error);
+      process.exit(1);
+    });
+}
