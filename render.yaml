@@ -24,6 +24,7 @@ services:
         sync: false
       - key: DB_PASSWORD
         sync: false
+<<<<<<< HEAD
 
   - type: web
     name: nlqueryengine-frontend
@@ -35,3 +36,5 @@ services:
     envVars:
       - key: VITE_API_URL
         sync: false
+=======
+>>>>>>> origin/main
