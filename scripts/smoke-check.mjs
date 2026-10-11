@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import path from 'node:path';
+const root = process.cwd();
+const backend = fs.readFileSync(path.join(root,'backend/src/server.js'),'utf8');
+const app = fs.readFileSync(path.join(root,'frontend/src/App.jsx'),'utf8');
+const required = [['/api/health','health'],['/api/auth/login','login'],['/api/bootstrap','bootstrap'],['/api/datasets/upload','upload'],['/api/query','query'],['/api/dashboards','dashboards'],['/api/users','users'],['/api/requests','requests']];
+for (const [route,name] of required) if (!backend.includes(route)) throw new Error(`Missing ${name} route`);
+for (const role of ['admin','manager','analyst','viewer']) if (!backend.includes(`'${role}'`)) throw new Error(`Missing role ${role}`);
+for (const text of ['import React,','nlq_token','VITE_API_URL','/auth/login','/bootstrap']) if (!app.includes(text)) throw new Error(`Missing frontend integration: ${text}`);
+console.log('NLQueryEngine smoke checks passed.');
