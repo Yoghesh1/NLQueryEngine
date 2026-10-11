@@ -26,3 +26,8 @@ test('GET /api/me rejects unauthenticated requests', async () => {
 
   expect(response.status).toBe(401);
 });
+test('GET /api/users rejects unauthenticated requests', async () => {
+  const response = await request(server).get('/api/users');
+
+  expect(response.status).toBe(401);
+});
