@@ -3,7 +3,7 @@ services:
     name: nlqueryengine-api
     runtime: node
     rootDir: backend
-    buildCommand: npm install
+    buildCommand: npm ci
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:
